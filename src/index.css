@@ -1,0 +1,249 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ── */
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #060C18;
+  color: #E6F2F7;
+  font-family: 'Outfit', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection { background: rgba(14,165,233,0.35); color: #fff; }
+
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: #060C18; }
+::-webkit-scrollbar-thumb { background: #0EA5E9; border-radius: 2px; }
+
+/* ── Video overlay — top transparent (players show), bottom dark (content readable) ── */
+
+.video-overlay {
+  background:
+    linear-gradient(90deg, rgba(6,12,24,0.52) 0%, rgba(6,12,24,0.04) 55%, transparent 100%),
+    linear-gradient(180deg,
+      rgba(6,12,24,0.32)  0%,
+      rgba(6,12,24,0.04)  18%,
+      rgba(6,12,24,0.04)  52%,
+      rgba(6,12,24,0.72)  74%,
+      rgba(6,12,24,0.97)  100%
+    );
+}
+
+/* ── Stadium beams — desktop only ── */
+
+.stadium-beam {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .stadium-beam {
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 65%;
+    background: linear-gradient(to bottom, rgba(14,165,233,0.22), transparent);
+    transform-origin: top center;
+    pointer-events: none;
+  }
+}
+
+/* ── Marquee carousel ── */
+
+@keyframes marquee {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-33.333%, 0, 0); }
+}
+
+.marquee-track {
+  display: flex;
+  animation: marquee 20s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+  transform: translateZ(0);
+}
+
+.marquee-set {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.875rem;
+  padding-right: 0.875rem;
+}
+
+@media (max-width: 640px) {
+  .marquee-track { animation-duration: 15s; }
+}
+
+/* ── Liquid glass card — inner refraction border ── */
+
+.glass-card {
+  background: rgba(12, 22, 40, 0.72);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ── Sticky glass bar ── */
+
+.sticky-glass {
+  background: rgba(6,12,24,0.90);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+}
+
+/* ── Liquid glass CTA button ── */
+
+@keyframes btn-attention {
+  0%, 60%, 100% {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.32), 0 8px 28px rgba(14,165,233,0.32);
+    transform: scale(1);
+  }
+  30% {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.42), 0 10px 40px rgba(14,165,233,0.65), 0 0 0 4px rgba(14,165,233,0.18);
+    transform: scale(1.018);
+  }
+}
+
+@keyframes btn-shine {
+  0%, 35%, 100% { background-position: 260% center; }
+  55%           { background-position: -60% center; }
+}
+
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #1ACBFF 0%, #0280C2 100%);
+  color: #ffffff;
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.28);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.32), 0 8px 28px rgba(14,165,233,0.32);
+  transition: filter 0.2s ease;
+  animation: btn-attention 6s ease-in-out infinite 1.4s;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.15) 50%, transparent 65%);
+  background-size: 320% 100%;
+  animation: btn-shine 6s ease-in-out infinite 1.4s;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.btn-primary:hover  { filter: brightness(1.10); }
+.btn-primary:active { transform: scale(0.98); animation: none; }
+
+/* ── Premium 3D CTA button ── */
+
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(155deg, #2ADEFF 0%, #0EA5E9 42%, #0175C2 100%);
+  color: #ffffff;
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.50),
+    inset 0 -2px 0 rgba(0,0,0,0.22),
+    0 3px 0 rgba(0,48,96,1),
+    0 10px 40px rgba(14,165,233,0.22);
+  transition: filter 0.15s ease, box-shadow 0.2s ease;
+}
+
+.btn-premium:hover {
+  filter: brightness(1.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.55),
+    inset 0 -2px 0 rgba(0,0,0,0.22),
+    0 3px 0 rgba(0,48,96,1),
+    0 16px 56px rgba(14,165,233,0.35);
+}
+
+/* ── Gold headline treatments ── */
+
+.text-gold-outline {
+  color: #CDB87A;
+  -webkit-text-stroke: 0.4px rgba(255, 225, 130, 0.25);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.70);
+}
+
+.text-gold-3d {
+  color: #F0C030;
+  -webkit-text-stroke: 0.5px rgba(255, 240, 100, 0.35);
+  text-shadow:
+    0 2px 0 rgba(80, 38, 0, 0.85),
+    0 5px 16px rgba(0, 0, 0, 0.50);
+}
+
+/* ── Supporting text treatments ── */
+
+.text-body-premium {
+  color: rgba(235, 215, 170, 0.90);
+  -webkit-text-stroke: 0.3px rgba(255, 220, 140, 0.20);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.60);
+  transition: color 0.3s ease;
+}
+
+.text-stat-value {
+  color: #FFD200;
+  -webkit-text-stroke: 0.5px rgba(255, 220, 60, 0.30);
+  text-shadow:
+    1px 1px 0 rgba(90, 44, 0, 0.80),
+    0 3px 10px rgba(0, 0, 0, 0.45);
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.text-stat-label {
+  color: rgba(210, 178, 95, 0.72);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
+  transition: color 0.25s ease;
+}
+
+.stat-cell:hover .text-stat-value {
+  color: #FFE84D;
+  text-shadow:
+    1px 2px 0 rgba(90, 44, 0, 0.90),
+    0 5px 16px rgba(0, 0, 0, 0.55);
+}
+
+.stat-cell:hover .text-stat-label {
+  color: rgba(230, 200, 120, 0.90);
+}
+
+/* ── Section divider ── */
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(14,165,233,0.18), transparent);
+}
+
+/* ── Reduced motion — mandatory ── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .marquee-track { animation: none; }
+}
