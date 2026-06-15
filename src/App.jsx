@@ -11,8 +11,8 @@ export default function App() {
       <HowToJoin />
       {/* 18+ notice */}
       <p className="text-center font-body text-ice/20 text-xs px-6 py-6 leading-relaxed pb-24">
-        18+ only. Gamble responsibly. i88 supports responsible gambling.
-        MY helpline: 1-800-88-3151
+       You will be automatically redirected to the official website. 
+      Kindly disregard any differences in the brand name, as this is due to policy requirements.
       </p>
       <StickyCTA />
     </div>
