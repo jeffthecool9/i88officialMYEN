@@ -22,25 +22,25 @@ export default function StickyCTA() {
           </p>
         </div>
 
-       <PremiumButton
+     <PremiumButton
   size="sm"
   onClick={() => {
     // Meta Pixel tracking
     if (window.fbq) {
       window.fbq('track', 'Lead', {
-        content_name: 'Sticky Bar CTA',
+        content_name: 'English Sticky Bar CTA',
         section: 'sticky_bar',
-        button_text: 'Sertai Sekarang'
+        button_text: 'Join Now'
       });
 
-      window.fbq('trackCustom', 'StickyCTAClick', {
+      window.fbq('trackCustom', 'EnglishStickyCTAClick', {
         section: 'sticky_bar',
-        button_text: 'Sertai Sekarang'
+        button_text: 'Join Now'
       });
     }
 
     // Your existing tracking
-    trackEvent('sticky_cta_click', { section: 'sticky_bar' });
+    trackEvent('english_sticky_cta_click', { section: 'sticky_bar' });
 
     // Delay slightly so Meta can fire before redirect
     setTimeout(() => {
@@ -50,7 +50,7 @@ export default function StickyCTA() {
   wrapperClassName="flex-1 sm:flex-none"
   className="w-full"
 >
-  Sertai Sekarang
+  Join Now
 </PremiumButton>
       </div>
     </motion.div>
