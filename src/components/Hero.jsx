@@ -76,26 +76,26 @@ export default function Hero() {
             35,306 players already joined — play Golden Boot Showdown today.
           </motion.p>
 
-          <motion.div variants={rise} className="flex md:justify-start justify-center mb-4">
+         <motion.div variants={rise} className="flex md:justify-start justify-center mb-4">
   <PremiumButton
     size="lg"
     onClick={() => {
       // Meta Pixel tracking
       if (window.fbq) {
         window.fbq('track', 'Lead', {
-          content_name: 'Hero CTA',
+          content_name: 'English Hero CTA',
           section: 'hero',
-          button_text: 'Sertai Sekarang'
+          button_text: 'Join Now'
         });
 
-        window.fbq('trackCustom', 'HeroCTAClick', {
+        window.fbq('trackCustom', 'EnglishHeroCTAClick', {
           section: 'hero',
-          button_text: 'Sertai Sekarang'
+          button_text: 'Join Now'
         });
       }
 
       // Your existing tracking
-      trackEvent('hero_cta_click', { section: 'hero' });
+      trackEvent('english_hero_cta_click', { section: 'hero' });
 
       // Delay slightly so Meta can fire before redirect
       setTimeout(() => {
@@ -104,7 +104,7 @@ export default function Hero() {
     }}
     className="w-full sm:w-auto"
   >
-    Sertai Sekarang
+    Join Now
   </PremiumButton>
 </motion.div>
 
