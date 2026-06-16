@@ -22,15 +22,36 @@ export default function StickyCTA() {
           </p>
         </div>
 
-        {/* CTA */}
-        <PremiumButton
-          size="sm"
-          onClick={() => { trackEvent('sticky_cta_click', { section: 'sticky_bar' }); window.open('https://www.palacehub8.com/fEtYDN75') }}
-          wrapperClassName="flex-1 sm:flex-none"
-          className="w-full"
-        >
-          Join Now
-        </PremiumButton>
+       <PremiumButton
+  size="sm"
+  onClick={() => {
+    // Meta Pixel tracking
+    if (window.fbq) {
+      window.fbq('track', 'Lead', {
+        content_name: 'Sticky Bar CTA',
+        section: 'sticky_bar',
+        button_text: 'Sertai Sekarang'
+      });
+
+      window.fbq('trackCustom', 'StickyCTAClick', {
+        section: 'sticky_bar',
+        button_text: 'Sertai Sekarang'
+      });
+    }
+
+    // Your existing tracking
+    trackEvent('sticky_cta_click', { section: 'sticky_bar' });
+
+    // Delay slightly so Meta can fire before redirect
+    setTimeout(() => {
+      window.open('https://www.palacehub8.com/uZieoLoC', '_blank');
+    }, 300);
+  }}
+  wrapperClassName="flex-1 sm:flex-none"
+  className="w-full"
+>
+  Sertai Sekarang
+</PremiumButton>
       </div>
     </motion.div>
   )
